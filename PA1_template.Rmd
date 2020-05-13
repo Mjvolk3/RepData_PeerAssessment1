@@ -5,7 +5,7 @@ output:
     keep_md: true
 ---
 
-```{r}
+```{r setup, include = FALSE}
 library(dplyr)
 ```
 

@@ -366,15 +366,6 @@ summary {
 </div>
 
 
-<pre class="r"><code>library(dplyr)</code></pre>
-<pre><code>## 
-## Attaching package: 'dplyr'</code></pre>
-<pre><code>## The following objects are masked from 'package:stats':
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union</code></pre>
 <div id="loading-and-preprocessing-the-data" class="section level2">
 <h2>Loading and preprocessing the data</h2>
 <p>the file is read in and “NA” values are removed</p>
@@ -418,8 +409,8 @@ plot(dat_time_series$interval, dat_time_series$avg_num_steps,
 <li>The maximum number of steps taken over all of the days occured during time interval 835 .</li>
 </ul>
 </div>
-<div id="inputing-missing-values" class="section level2">
-<h2>Inputing missing values</h2>
+<div id="imputing-missing-values" class="section level2">
+<h2>Imputing missing values</h2>
 <pre class="r"><code>na_count &lt;- sum(is.na(dat_na))
 dat_na_rep &lt;- dat_na
 for (i in 1:nrow(dat_na_rep)){

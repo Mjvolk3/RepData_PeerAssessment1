@@ -6,26 +6,6 @@ output:
 ---
 
 
-```r
-library(dplyr)
-```
-
-```
-## 
-## Attaching package: 'dplyr'
-```
-
-```
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-```
 
 ## Loading and preprocessing the data
 the file is read in and "NA" values are removed
@@ -77,7 +57,7 @@ plot(dat_time_series$interval, dat_time_series$avg_num_steps,
 
 - The maximum number of steps taken over all of the days occured during time interval 835 .  
 
-## Inputing missing values
+## Imputing missing values
 
 ```r
 na_count <- sum(is.na(dat_na))
@@ -153,8 +133,3 @@ plot(weekend_tb$interval, weekend_tb$avg_num_steps,
 ```
 
 ![](PA1_template_files/figure-html/fig4-1.png)<!-- -->
-
-
-
-
-
