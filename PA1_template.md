@@ -5,14 +5,33 @@ output:
     keep_md: true
 ---
 
-```{r}
+
+```r
 library(dplyr)
+```
+
+```
+## 
+## Attaching package: 'dplyr'
+```
+
+```
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
 ```
 
 ## Loading and preprocessing the data
 the file is read in and "NA" values are removed
 
-```{r}
+
+```r
 file_name <- "activity.csv"
 dat_na <- read.csv("activity.csv")
 dat <- dat_na[!is.na(dat_na$steps),]
@@ -20,7 +39,8 @@ dat <- dat_na[!is.na(dat_na$steps),]
 
 ## What is mean total number of steps taken per day?
 
-```{r}
+
+```r
 total_steps_per_day <- sum(dat$steps)/nlevels(dat$date)
 gb_date <- group_by(dat,date)
 dat_steps_per_day <- summarize(gb_date, steps_per_day = sum(steps))
@@ -33,13 +53,16 @@ hist(dat_steps_per_day$steps_per_day,
      main = "Steps/day Histogram")
 ```
 
-- The total number of steps/day is `r total_steps_per_day`.  
-- The median of the steps/day is `r median`.  
-- The mean of the steps/day is `r mean`.  
+![](PA1_template_files/figure-html/fig1-1.png)<!-- -->
+
+- The total number of steps/day is 9354.2295082.  
+- The median of the steps/day is 1.0765\times 10^{4}.  
+- The mean of the steps/day is 1.0766189\times 10^{4}.  
 
 ## What is the average daily activity pattern?
 
-```{r}
+
+```r
 gb_interval <- group_by(dat, interval)
 dat_time_series <- summarize(gb_interval, avg_num_steps = mean(steps))
 max_interval <- dat_time_series[which.max(dat_time_series$avg_num_steps),]$interval
@@ -50,10 +73,13 @@ plot(dat_time_series$interval, dat_time_series$avg_num_steps,
      main = "Steps over Time")
 ```
 
-- The maximum number of steps taken over all of the days occured during time interval `r max_interval` .  
+![](PA1_template_files/figure-html/fig2-1.png)<!-- -->
+
+- The maximum number of steps taken over all of the days occured during time interval 835 .  
 
 ## Inputing missing values
-```{r}
+
+```r
 na_count <- sum(is.na(dat_na))
 dat_na_rep <- dat_na
 for (i in 1:nrow(dat_na_rep)){
@@ -76,17 +102,20 @@ hist(dat_steps_per_day_rep$steps_per_day,
      main = "Steps/day Histogram")
 ```
 
+![](PA1_template_files/figure-html/fig3-1.png)<!-- -->
+
 Here we replace NA values in the _Steps_ column with the average number of steps during the specified time interval across all possible dates.  
 
-- The median of the steps/day is `r median_rep`.  
-- The mean of the steps/day is `r mean_rep`.  
+- The median of the steps/day is 1.0766189\times 10^{4}.  
+- The mean of the steps/day is 1.0766189\times 10^{4}.  
 - To look at the change we can take the difference between the previously calculated median and mean.  
 
-The mean difference is `r mean_rep - mean` and the median difference is `r median_rep - median`. Allowing us to conclude that the difference between omitting NAs and replacing NA's is negligible.  
+The mean difference is 0 and the median difference is 1.1886792. Allowing us to conclude that the difference between omitting NAs and replacing NA's is negligible.  
 
 ## Are there differences in activity patterns between weekdays and weekends?
 To answer this question we group the data by weekend or weekday and then plot the average number of steps over each interval.  
-```{r fig4, fig.height = 8, fig.width = 10}
+
+```r
 weekend <- function(day){
         day <- weekdays(as.POSIXct(day))
         if (day == "Sunday" | day == "Saturday"){
@@ -122,6 +151,8 @@ plot(weekend_tb$interval, weekend_tb$avg_num_steps,
      ylim = c(0,250),
      main = 'weekend')
 ```
+
+![](PA1_template_files/figure-html/fig4-1.png)<!-- -->
 
 
 
