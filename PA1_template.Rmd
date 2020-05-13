@@ -122,8 +122,3 @@ plot(weekend_tb$interval, weekend_tb$avg_num_steps,
      ylim = c(0,250),
      main = 'weekend')
 ```
-
-
-
-
-
